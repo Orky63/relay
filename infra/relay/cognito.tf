@@ -20,3 +20,8 @@ resource "aws_cognito_user_pool_client" "web_client" {
   explicit_auth_flows = ["ALLOW_USER_PASSWORD_AUTH","ALLOW_REFRESH_TOKEN_AUTH"]
   generate_secret = false
 }
+
+output "cognito_client_id" {
+  value = aws_cognito_user_pool_client.web_client.id
+}
+
