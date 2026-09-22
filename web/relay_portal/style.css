@@ -1,0 +1,88 @@
+:root {
+    --bg: #f7f9fb;
+    --card: #fff;
+    --accent: #2563eb
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Inter, ui-sans-serif, system-ui, Segoe UI, Roboto, 'Helvetica Neue', Arial
+}
+
+body {
+    background: var(--bg);
+    margin: 0;
+    padding: 24px
+}
+
+#app {
+    max-width: 900px;
+    margin: 0 auto
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+h1 {
+    margin: 0;
+    font-size: 20px
+}
+
+section {
+    background: var(--card);
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 16px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .06)
+}
+
+label {
+    display: block;
+    margin-bottom: 8px
+}
+
+input,
+select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 6px;
+    border: 1px solid #e6e9ef;
+    border-radius: 6px
+}
+
+button {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer
+}
+
+.ticket {
+    border-left: 4px solid #e6e9ef;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    background: #fff
+}
+
+.ticket .meta {
+    font-size: 12px;
+    color: #666
+}
+
+.status-open {
+    border-left-color: #f59e0b
+}
+
+.status-investigating {
+    border-left-color: #ef4444
+}
+
+.status-resolved {
+    border-left-color: #10b981
+}

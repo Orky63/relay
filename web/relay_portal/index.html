@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Relay — Incident Portal (Demo)</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <h1>Relay — Incident Portal (Demo)</h1>
+            <small id="endpoint-info"></small>
+        </header>
+
+        <section id="create">
+            <h2>Create Ticket</h2>
+            <form id="create-form">
+                <label>Title<br /><input name="title" required></label>
+                <label>Status<br />
+                    <select name="status">
+                        <option>open</option>
+                        <option>investigating</option>
+                        <option>resolved</option>
+                    </select>
+                </label>
+                <button type="submit">Create</button>
+            </form>
+        </section>
+
+        <section id="list">
+            <h2>Tickets</h2>
+            <div id="tickets"></div>
+        </section>
+    </div>
+
+    <script>
+        // Configure API endpoint by setting window.API_ENDPOINT above this script tag
+    </script>
+    <script src="app.js"></script>
+</body>
+
+</html>
