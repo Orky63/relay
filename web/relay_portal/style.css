@@ -23,7 +23,48 @@ body {
 header {
     display: flex;
     align-items: center;
-    justify-content: space-between
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px
+}
+
+.p1-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #475569;
+    font-size: 14px;
+    font-weight: 600
+}
+
+.p1-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 12px;
+    background: #e2e8f0;
+    font-weight: 800
+}
+
+#p1-count {
+    display: inline-grid;
+    place-items: center;
+    min-width: 30px;
+    min-height: 30px;
+    padding: 0 6px;
+    border-radius: 50%;
+    background: #fff;
+    font-variant-numeric: tabular-nums
+}
+
+.p1-indicator.has-incidents {
+    color: #991b1b
+}
+
+.has-incidents .p1-icon {
+    background: #fee2e2;
+    border: 1px solid #fca5a5
 }
 
 h1 {

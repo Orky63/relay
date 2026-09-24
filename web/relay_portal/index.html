@@ -11,14 +11,27 @@
 <body>
     <div id="app">
         <header>
-            <h1>Relay — Incident Portal (Demo)</h1>
-            <small id="endpoint-info"></small>
+            <div>
+                <h1>Relay — Incident Portal (Demo)</h1>
+                <small id="endpoint-info"></small>
+            </div>
+            <div id="p1-indicator" class="p1-indicator" role="status" aria-live="polite" aria-atomic="true">
+                <span class="p1-icon" aria-hidden="true">P1 <span id="p1-count">0</span></span>
+                <span id="p1-description">Active P1 incidents</span>
+            </div>
         </header>
 
         <section id="create">
             <h2>Create Ticket</h2>
             <form id="create-form">
                 <label>Title<br /><input name="title" required></label>
+                <label>Priority<br />
+                    <select name="priority">
+                        <option value="P1">P1 — Critical</option>
+                        <option value="P2" selected>P2 — High</option>
+                        <option value="P3">P3 — Normal</option>
+                    </select>
+                </label>
                 <label>Status<br />
                     <select name="status">
                         <option>open</option>
