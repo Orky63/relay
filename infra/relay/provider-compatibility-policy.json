@@ -1,0 +1,30 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "apigateway:TagResource",
+            "Resource": "arn:aws:apigateway:us-east-1::/apis/l7fj56bte2/stages*",
+            "Condition": {
+                "StringEquals": {
+                    "aws:RequestTag/Project": "relay"
+                }
+            }
+        },
+        {
+            "Effect": "Allow",
+            "Action": "cognito-idp:GetUserPoolMfaConfig",
+            "Resource": "arn:aws:cognito-idp:us-east-1:387344700059:userpool/*",
+            "Condition": {
+                "StringEquals": {
+                    "aws:ResourceTag/Project": "relay"
+                }
+            }
+        },
+        {
+            "Effect": "Allow",
+            "Action": "s3:GetAccelerateConfiguration",
+            "Resource": "arn:aws:s3:::relay-dev-attachments"
+        }
+    ]
+}
