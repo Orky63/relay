@@ -8,9 +8,12 @@ data "aws_iam_policy_document" "lambda_assume" {
   }
 }
 
+data "aws_caller_identity" "current" {}
+
 resource "aws_iam_role" "lambda_role" {
-  name               = "${local.name_prefix}-lambda-role"
-  assume_role_policy = data.aws_iam_policy_document.lambda_assume.json
+  name                 = "${local.name_prefix}-lambda-role"
+  assume_role_policy   = data.aws_iam_policy_document.lambda_assume.json
+  permissions_boundary = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:policy/relay-lambda-boundary"
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_basic_exec" {
@@ -36,8 +39,8 @@ resource "aws_iam_role_policy" "lambda_dynamodb" {
         Resource = aws_dynamodb_table.tickets.arn
       },
       {
-        Action = ["s3:PutObject","s3:GetObject"]
-        Effect = "Allow"
+        Action   = ["s3:PutObject", "s3:GetObject"]
+        Effect   = "Allow"
         Resource = "${aws_s3_bucket.attachments.arn}/*"
       }
     ]

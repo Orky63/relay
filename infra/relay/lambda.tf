@@ -1,20 +1,16 @@
-resource "null_resource" "package_lambda" {
-  triggers = {
-    source_md5 = filesha256("${path.root}/services/relay_lambda/handler.py")
-  }
-
-  provisioner "local-exec" {
-    command = "mkdir -p ${path.module}/build && /usr/bin/zip -j ${path.module}/build/relay.zip ${path.root}/services/relay_lambda/handler.py"
-  }
+data "archive_file" "lambda" {
+  type        = "zip"
+  source_file = "${path.module}/../../services/relay_lambda/handler.py"
+  output_path = "${path.module}/build/relay.zip"
 }
 
 resource "aws_lambda_function" "api_handler" {
-  filename         = "${path.module}/build/relay.zip"
+  filename         = data.archive_file.lambda.output_path
   function_name    = "${local.name_prefix}-api-handler"
   role             = aws_iam_role.lambda_role.arn
   handler          = "handler.lambda_handler"
-  runtime          = "python3.9"
-  source_code_hash = filebase64sha256("${path.module}/build/relay.zip")
+  runtime          = "python3.12"
+  source_code_hash = data.archive_file.lambda.output_base64sha256
 
   environment {
     variables = {
@@ -22,5 +18,5 @@ resource "aws_lambda_function" "api_handler" {
     }
   }
 
-  depends_on = [null_resource.package_lambda]
+  depends_on = [aws_iam_role_policy_attachment.lambda_basic_exec, aws_iam_role_policy.lambda_dynamodb]
 }

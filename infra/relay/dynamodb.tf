@@ -8,11 +8,6 @@ resource "aws_dynamodb_table" "tickets" {
     type = "S"
   }
 
-  attribute {
-    name = "status"
-    type = "S"
-  }
-
   tags = {
     Project = var.project_name
     Env     = var.env

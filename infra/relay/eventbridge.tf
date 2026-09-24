@@ -1,7 +1,7 @@
 resource "aws_cloudwatch_event_rule" "incidents" {
-  name        = "${local.name_prefix}-incidents"
+  name = "${local.name_prefix}-incidents"
   event_pattern = jsonencode({
-    source = ["relay" ]
+    source = ["relay"]
   })
 }
 
