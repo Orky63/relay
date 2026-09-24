@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1090" viewBox="0 0 1280 1090" role="img" aria-labelledby="title description">
+<title id="title">Relay — current architecture</title>
+<desc id="description">A local demo portal is not yet connected to the AWS backend. API Gateway invokes Lambda, which stores and retrieves individual tickets in DynamoDB and writes logs to CloudWatch. EventBridge has a configured Lambda target. Cognito, an attachment bucket, and SNS are provisioned but not integrated into user workflows. GitHub Actions deploys Terraform, using a separate S3 state bucket.</desc>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="none" stroke="#64748b" stroke-width="1.5"/></marker></defs>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#172b4d}.heading{font-size:23px;font-weight:700}.body{font-size:16px;fill:#475569}.label{font-size:14px;fill:#475569}.small{font-size:14px;fill:#64748b}.section{font-size:15px;font-weight:700;letter-spacing:1.4px;fill:#2563eb}.line{fill:none;stroke:#64748b;stroke-width:2;marker-end:url(#arrow)}</style>
+<rect width="1280" height="1090" fill="#f5f7fb"/>
+<text x="48" y="61" font-size="34" font-weight="700">Relay</text>
+<text x="48" y="95" font-size="20" fill="#475569">Current architecture · Development environment · 24 September 2026</text>
+
+<rect x="48" y="128" width="1184" height="116" rx="14" fill="#eff6ff" stroke="#93c5fd"/>
+<text x="68" y="162" class="heading">Browser portal · local demo</text>
+<text x="68" y="190" class="body">HTML / CSS / JavaScript at localhost:8000 · sample tickets held in memory</text>
+<text x="68" y="213" class="body">Not hosted online; live API integration, CORS and sign-in remain to be completed.</text>
+<rect x="48" y="274" width="1184" height="518" rx="20" fill="#fff" stroke="#cbd5e1"/>
+<text x="72" y="308" class="section">AWS · US-EAST-1 · RELAY-DEV</text>
+<rect x="80" y="344" width="300" height="119" rx="14" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="100" y="378" class="heading">API Gateway HTTP API</text>
+<text x="100" y="406" class="body">Ticket routes → Lambda</text>
+<text x="100" y="429" class="body">JWT authorizer not enforced</text>
+<rect x="474" y="344" width="300" height="119" rx="14" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="494" y="378" class="heading">Lambda · Python 3.12</text>
+<text x="494" y="406" class="body">Create / write tickets</text>
+<text x="494" y="429" class="body">Retrieve an individual ticket</text>
+<rect x="868" y="344" width="330" height="119" rx="14" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="888" y="378" class="heading">DynamoDB</text>
+<text x="888" y="406" class="body">Ticket records</text>
+<text x="888" y="429" class="body">PutItem / GetItem</text>
+<path d="M380 403 H474" class="line"/>
+<text x="396" y="390" class="label">invoke</text>
+<path d="M774 403 H868" class="line"/>
+<text x="788" y="390" class="label">read / write</text>
+<rect x="80" y="511" width="300" height="108" rx="14" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="100" y="545" class="heading">EventBridge rule</text>
+<text x="100" y="573" class="body">Matches source: relay</text>
+<text x="100" y="596" class="body">Lambda target configured</text>
+<rect x="474" y="511" width="300" height="108" rx="14" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="494" y="545" class="heading">CloudWatch Logs</text>
+<text x="494" y="573" class="body">Lambda execution logs</text>
+<text x="494" y="596" class="body">14-day retention</text>
+<path d="M380 565 H425 V445 H474" class="line"/>
+<path d="M624 463 V511" class="line"/>
+<text x="640" y="491" class="label">logs</text>
+<text x="865" y="541" class="section">Application limits</text>
+<text x="865" y="569" class="body">List endpoint returns an empty list.</text>
+<text x="865" y="594" class="body">No complete update workflow yet.</text>
+<rect x="80" y="650" width="1118" height="115" rx="14" fill="#fffbeb" stroke="#fcd34d"/>
+<text x="100" y="684" class="heading">Provisioned foundations · application integration pending</text>
+<text x="100" y="712" class="body">Cognito user pool + client / JWT authorizer     •     S3 attachments bucket     •     SNS topic</text>
+<text x="100" y="735" class="body">No working portal sign-in, file upload or notification delivery flow yet.</text>
+<text x="48" y="832" class="section">DELIVERY &amp; STATE</text>
+<rect x="48" y="850" width="330" height="135" rx="14" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="68" y="884" class="heading">GitHub Actions</text>
+<text x="68" y="912" class="body">CI: Terraform checks + pytest</text>
+<text x="68" y="935" class="body">Deploy: Terraform plan / apply</text>
+<text x="68" y="958" class="body">Push to master/main or manual run</text>
+<rect x="462" y="850" width="310" height="135" rx="14" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="482" y="884" class="heading">AWS application stack</text>
+<text x="482" y="912" class="body">Terraform-managed resources</text>
+<text x="482" y="935" class="body">Scoped deployment IAM user</text>
+<text x="482" y="958" class="body">Lambda role with boundary</text>
+<rect x="855" y="850" width="377" height="135" rx="14" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="875" y="884" class="heading">S3 · Terraform state</text>
+<text x="875" y="912" class="body">Bootstrapped separately</text>
+<text x="875" y="935" class="body">Versioned + encrypted; public blocked</text>
+<text x="875" y="958" class="body">State file + S3 lock file</text>
+<path d="M378 903 H462" class="line"/>
+<text x="390" y="891" class="label">deploy</text>
+<path d="M378 956 V1013 H1043 V985" class="line"/>
+<text x="513" y="1036" class="label">Terraform backend access: state + locking</text>
+<text x="48" y="1070" class="small">CI and deployment run independently. Arrows show configured connections, not a complete user workflow.</text>
+</svg>

@@ -44,6 +44,12 @@ loading, and authentication.
 
 ## Architecture
 
+![Relay architecture: local demo portal, AWS serverless backend, and Terraform deployment and state storage](docs/architecture.svg)
+
+[Open the full-size architecture diagram](docs/architecture.svg). This diagram
+shows the current development setup, including provisioned components whose
+application integration is still pending.
+
 | Component | Purpose |
 | --- | --- |
 | HTML, CSS, and JavaScript portal | Local incident-management demo |
